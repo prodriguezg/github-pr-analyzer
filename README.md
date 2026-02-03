@@ -2,7 +2,7 @@
 
 A minimal monorepo that analyzes GitHub pull request diffs using OpenAI. It includes a NestJS backend that returns structured JSON reviews and a Vite + React frontend for submitting diffs and viewing results.
 
-<img width="1184" height="1052" alt="image" src="https://github.com/user-attachments/assets/9e86c489-f8d3-4362-a0cb-94594c594360" />
+<img width="1184" height="1052" alt="image" src="https://github.com/user-attachments/assets/1d5082aa-4654-486d-9c90-cc597eb8d47b" />
 
 
 ## Architecture
