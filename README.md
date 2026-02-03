@@ -2,6 +2,9 @@
 
 A minimal monorepo that analyzes GitHub pull request diffs using OpenAI. It includes a NestJS backend that returns structured JSON reviews and a Vite + React frontend for submitting diffs and viewing results.
 
+<img width="1184" height="1052" alt="image" src="https://github.com/user-attachments/assets/9e86c489-f8d3-4362-a0cb-94594c594360" />
+
+
 ## Architecture
 - `src/backend`: NestJS API (`POST /reviews`, `GET /health`)
 - `src/frontend`: Vite React UI
@@ -32,12 +35,16 @@ docker-compose up --build
 - Backend: `http://localhost:3000`
 - Frontend: `http://localhost:5173`
 
+*NOTE:* Must run `npm install` on both projects before trying to build the containers in order to get package-lock.json files
+  
+
 ## Environment Variables
 Create a `.env` file at the repo root (see `.env.example`):
 
 - `OPENAI_API_KEY` (required)
 - `OPENAI_MODEL` (optional, default `gpt-4.1-mini`)
 - `FRONTEND_ORIGIN` (optional, default `http://localhost:5173`)
+- `MAX_DIFF_LENGTH` (optional, default: `200_000`)
 - `VITE_API_BASE_URL` (frontend build-time, default `http://localhost:3000`)
 
 ## Example Request
@@ -52,3 +59,4 @@ curl -X POST http://localhost:3000/reviews \
     "diff": "diff --git a/src/pager.ts b/src/pager.ts\nindex 123..456 100644\n--- a/src/pager.ts\n+++ b/src/pager.ts\n@@ -10,6 +10,10 @@ export function paginate(items: string[], page: number) {\n   if (page < 1) return [];\n+  if (items.length === 0) {\n+    return [];\n+  }\n   const start = (page - 1) * 10;\n   return items.slice(start, start + 10);\n }"
   }'
 ```
+
